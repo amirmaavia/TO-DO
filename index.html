@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="index.css" rel="stylesheet" >
+ </head>
+<body>
+    <div id="todo"></div>
+    
+
+
+    <script>
+                //heading
+        var div = document.getElementById('todo')
+        var heading = document.createElement('h1')
+        heading.innerHTML = `<b> Todo App<b>`
+         div.appendChild(heading)
+
+        //input
+        var input = document.createElement('input')
+        // input.setAttribute('id','inp')
+        input.setAttribute('type','text')
+        input.setAttribute('placeholder','Enter Your Tudo Element')
+        div.appendChild(input)
+        
+
+        //add tudo
+        var btn = document.createElement('button')
+        btn.setAttribute('onclick','addtodo()')
+         btn.setAttribute('id','btn')
+        btn.innerHTML = `<i class="fas fa-plus"></i>`
+        div.appendChild(btn);
+  var divs = document.createElement('div')
+        div.appendChild(divs);
+
+        // delete Tudo
+        var btn1 = document.createElement('button')
+        btn1.setAttribute('onclick','dltlst()')
+        btn1.setAttribute('id','btn1')
+        btn1.innerHTML = `<i class="fas fa-trash"></i>`
+        div.appendChild(btn1)
+        var div1 = document.createElement('div')
+        div.appendChild(div1)
+    
+    
+
+        var todolist = []
+        var edittodos;
+
+       
+        
+         function addtodo(){
+            if(input.value == 0){
+                window.alert(`Enter your todo item`)
+            }
+            else{
+            todolist.push(input.value)
+            
+            
+            input.value = ""
+            console.log(todolist)
+        showtxt()
+        }
+         }
+         function dltlst(i){
+           if(todolist == ""){
+               alert('your list already is empty')
+           }
+           else{todolist.splice(0,todolist.length)
+           showtxt()
+        } 
+    }
+    
+     
+
+        function showtxt(){
+            divs.innerHTML = ""
+            for (var i = 0; i<todolist.length;i++){
+                var p = document.createElement('p')
+                p.innerHTML = todolist[i]
+divs.appendChild(p)
+
+var bt = document.createElement('button')
+bt.innerHTML = `<i class="fas fa-trash-alt"></i>`
+bt.setAttribute('onclick' , 'dlttodo('+ i +')')
+divs.appendChild(bt)
+
+var edit = document.createElement('button')
+divs.appendChild(edit)
+edit.innerHTML = `<i class="fas fa-edit"></i>`
+edit.setAttribute('onclick','edittodo('+ i +')')
+            }
+        }
+       
+
+        function dlttodo (i){
+            todolist.splice(i,1)
+            showtxt()
+        }
+        function edittodo (item){
+            edittodos = item
+            input.value = todolist[item]
+            btn.innerHTML = `<i class="far fa-save"></i>`
+            btn.setAttribute('onclick','savetodo()')
+        }
+        function savetodo(){
+            if(input.value == 0){
+                alert("plz enter your todo item")
+            }
+            else{
+            todolist.splice(edittodos, 1,input.value)
+           input.value = ""
+btn.innerHTML = `<i class="fas fa-plus"></i>`
+btn.setAttribute('onclick','addtodo()')
+            
+showtxt()
+        }
+        }
+    </script>
+</body>
+</html>
